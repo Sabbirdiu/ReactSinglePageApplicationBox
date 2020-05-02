@@ -1,17 +1,21 @@
 import React from 'react';
 import './App.css';
 import { Container, Row, Col } from 'reactstrap';
-import Todos from './components/todo/Todos';
+import Todos from './components/TodoApp/todo/Todos';
+import Poll from './components/PollApp/Poll';
 
 function App() {
   return (
-    <Container className='my-3'>
-      <Row>
-        <Col>
-          <Todos />
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Container className='my-3'>
+        <Row>
+          <Col>
+            <Todos />
+            <Poll />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 

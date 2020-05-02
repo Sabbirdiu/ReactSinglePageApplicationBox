@@ -66,6 +66,7 @@ export class Todos extends Component {
     });
   };
 
+  // create todo ,where we create  the todo and this function push the todo into state
   createTodo = (todo) => {
     todo.id = shortid.generate();
     todo.time = new Date();
