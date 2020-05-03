@@ -61,7 +61,7 @@ class Poll extends Component {
     poll.opinions = [];
 
     this.setState({
-      polls: this.state.polls.concat(poll),
+      polls: this.state.polls.concat(poll), //here concat is the default function who's work is take the all datafrom the state
     });
   };
   updatePoll = (updatedPoll) => {
@@ -93,6 +93,8 @@ class Poll extends Component {
                 polls={this.state.polls}
                 searchTerm={this.state.searchTerm}
                 handleSearch={this.state.handleSearch}
+                selectPoll={this.selectPoll}
+                addNewPoll={this.addNewPoll}
               />
             </Col>
             <Col md={8}>

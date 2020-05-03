@@ -1,13 +1,122 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import shortid from 'shortid';
+import InputForm from './InputForm';
+
+const defaultOptions = [
+  { id: shortid.generate(), value: '', vote: 0 },
+  { id: shortid.generate(), value: '', vote: 0 },
+];
 
 class PollForm extends Component {
-    render() {
-        return (
-            <div>
-                <h1>PollForm</h1>
-            </div>
-        )
+  state = {
+    title: '',
+    description: '',
+    options: defaultOptions,
+    errors: {},
+  };
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+  handleOptionChange = (event, index) => {
+    const options = [...this.state.options];
+    options[index].value = event.target.value;
+    this.setState({ options });
+  };
+
+  createOption = () => {
+    const { options } = this.state;
+    if (options.length < 5) {
+      options.push({
+        id: shortid.generate(),
+        value: '',
+        vote: 0,
+      });
+      this.setState({ options });
+    } else {
+      alert('You can create max 5 options');
     }
+  };
+  deleteOption = (index) => {
+    const { options } = this.state;
+    if (options.length > 2) {
+      options.splice(index, 1);
+      this.setState({ options });
+    } else {
+      alert('You must have at leaast two options');
+    }
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { isValid, errors } = this.validate();
+    if (isValid) {
+      const { title, description, options } = this.state;
+      this.props.submit({
+        title,
+        description,
+        options,
+      });
+      e.target.reset();
+      this.setState({
+        title: '',
+        description: '',
+        options: '',
+        errors: {},
+      });
+    } else {
+      this.setState({ errors });
+    }
+  };
+  validate = () => {
+    const errors = {};
+    const { title, description, options } = this.state;
+    if (!title) {
+      errors.title = 'Please Provide a title';
+    } else if (title.length < 20) {
+      errors.title = 'Title too short';
+    } else if (title.length > 100) {
+      errors.title = 'Title too Long';
+    }
+    if (!description) {
+      errors.description = 'Please Provide a description';
+    } else if (description.length > 500) {
+      errors.description = 'Description too long';
+    }
+    const optionErrors = [];
+    options.forEach((opt, index) => {
+      if (!opt.value) {
+        optionErrors[index] = 'Option Text Empty';
+      } else if (opt.value.length > 100) {
+        optionErrors[index] = 'Option Text Too Long';
+      }
+    });
+    if (optionErrors.length > 0) {
+      errors.options = optionErrors;
+    }
+    return {
+      errors,
+      isValid: Object.keys(errors).length === 0,
+    };
+  };
+
+  render() {
+    const { title, description, options, errors } = this.state;
+    return (
+      <InputForm
+        title={title}
+        description={description}
+        options={options}
+        buttonValue={this.props.buttonValue || 'Create Poll'}
+        errors={errors}
+        handleChange={this.handleChange}
+        handleOptionChange={this.handleOptionChange}
+        createOption={this.createOption}
+        deleteOption={this.deleteOption}
+        handleSubmit={this.handleSubmit}
+      />
+    );
+  }
 }
 
-export default PollForm
+export default PollForm;
