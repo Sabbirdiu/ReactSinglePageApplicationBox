@@ -31,6 +31,11 @@ const MainHeader = (props) => {
                 Poll
               </Link>
             </NavItem>
+            <NavItem>
+              <Link className='nav-item nav-link' to='/expensetracker'>
+                Expense Tracker
+              </Link>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
