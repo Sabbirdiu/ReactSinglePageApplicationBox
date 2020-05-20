@@ -7,20 +7,23 @@ import { Balance } from './layout/Balance';
 import Income from './layout/Income';
 import { TransactionList } from './layout/TransactionList';
 import { AddTransaction } from './layout/AddTransaction';
+import { GlobalProvider } from './context/GlobalState';
 
 function ExpanseTracker() {
   return (
-    <Body>
-      <div className='body'>
-        <Header />
-        <div className='container '>
-          <Balance />
-          <Income />
-          <TransactionList />
-          <AddTransaction />
+    <GlobalProvider>
+      <Body>
+        <div className='body'>
+          <Header />
+          <div className='container '>
+            <Balance />
+            <Income />
+            <TransactionList />
+            <AddTransaction />
+          </div>
         </div>
-      </div>
-    </Body>
+      </Body>
+    </GlobalProvider>
   );
 }
 
