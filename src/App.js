@@ -1,5 +1,5 @@
 import React from 'react';
-// import './App.css';
+import './App.css';
 import { Container, Row, Col } from 'reactstrap';
 import Todos from './components/TodoApp/todo/Todos';
 import Poll from './components/PollApp/Poll';
