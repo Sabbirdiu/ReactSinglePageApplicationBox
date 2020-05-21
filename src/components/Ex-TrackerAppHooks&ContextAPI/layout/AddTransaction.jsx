@@ -7,9 +7,14 @@ export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
   const { addTransaction } = useContext(GlobalContext);
-
+  const clearState = () => {
+    setText('');
+    setAmount('');
+  };
   const onSubmit = (e) => {
     e.preventDefault();
+    clearState();
+
     const newTransaction = {
       id: Math.floor(Math.random() * 10000000),
       text,
@@ -36,7 +41,7 @@ export const AddTransaction = () => {
           <div className='form-contro'>
             <label htmlFor='amount'>
               Amount <br />
-              (negative - expense, positive - income)
+              (when you add your expense use "-" sign befor number)
             </label>
             <input
               className='form-control'
