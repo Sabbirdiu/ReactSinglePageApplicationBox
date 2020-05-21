@@ -10,10 +10,10 @@ const initialState = {
     { id: 4, text: 'camera', amount: 150 },
   ],
 };
-// create context
+// create context which use in diffent child component
 export const GlobalContext = createContext(initialState);
 
-// provider component
+// provider component which use in root component
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 

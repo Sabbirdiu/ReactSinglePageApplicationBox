@@ -1,25 +1,23 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Transaction } from './Transaction';
 import { GlobalContext } from '../context/GlobalState';
 
 export const TransactionList = () => {
   const { transactions } = useContext(GlobalContext);
   return (
-    <Transaction>
+    <TransactionStyle>
       <h3>History</h3>
       <ul className='list'>
         {transactions.map((transaction) => (
-          <li className='minus'>
-            {transaction.text} <span>-$400</span>
-            <button className='delete-btn'>x</button>
-          </li>
+          <Transaction key={Transaction.id} transaction={transaction} />
         ))}
       </ul>
-    </Transaction>
+    </TransactionStyle>
   );
 };
 
-const Transaction = styled.div`
+const TransactionStyle = styled.div`
   .list {
     list-style-type: none;
     padding: 0;
