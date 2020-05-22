@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState';
 import { useContext } from 'react';
 export const AddTransaction = () => {
   const [text, setText] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const { addTransaction } = useContext(GlobalContext);
   const clearState = () => {
     setText('');
@@ -41,12 +41,12 @@ export const AddTransaction = () => {
           <div className='form-contro'>
             <label htmlFor='amount'>
               Amount <br />
-              (when you add your expense use "-" sign befor number)
+              (when you add your expense use "-" sign before number)
             </label>
             <input
               className='form-control'
               type='number'
-              placeholder='Enter amount...'
+              placeholder='+1000 or -5000'
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
